@@ -10,6 +10,7 @@ public class SendCredentialsTest extends TestClass {
         Assert.assertEquals("ramona's Site!", loginPage.CheckSiteTitle());
         Assert.assertEquals("Home", loginPage.CheckCurentPage());
 
+        mainPage.Logout();
         //Assert.assertTrue(loginPage.CheckForgotPassword());
         //Assert.assertTrue(loginPage.CheckForgotUsername());
     }

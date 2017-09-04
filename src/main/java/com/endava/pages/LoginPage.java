@@ -7,12 +7,6 @@ import org.openqa.selenium.support.PageFactory;
 
 public class LoginPage {
 
-    private WebDriver webDriver;
-
-    public LoginPage(WebDriver driver) {
-        this.webDriver = driver;
-    }
-
     @FindBy(className = "site-title")
     private WebElement siteTitle;
 
@@ -36,6 +30,12 @@ public class LoginPage {
 
     @FindBy(xpath = "//li[contains(@class,'active')]/span")
     private WebElement curentPage;
+
+    private WebDriver webDriver;
+
+    public LoginPage(WebDriver driver) {
+        this.webDriver = driver;
+    }
 
     public String CheckSiteTitle() {
         return siteTitle.getText();

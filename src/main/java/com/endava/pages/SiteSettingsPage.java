@@ -8,12 +8,6 @@ import java.util.List;
 
 public class SiteSettingsPage {
 
-    WebDriver webDriver;
-
-    public SiteSettingsPage(WebDriver driver) {
-        this.webDriver = driver;
-    }
-
     @FindBy(id = "jform_sitename")
     private WebElement siteName;
 
@@ -50,7 +44,16 @@ public class SiteSettingsPage {
     @FindBy(id = "jform_MetaRights")
     private WebElement contentRights;
 
-    public void EditSiteSettings() {
+    @FindBy(xpath = ".//*[@id='page-site']/div/fieldset[1]/legend")
+    private WebElement pageTitle;
 
+    WebDriver webDriver;
+
+    public SiteSettingsPage(WebDriver driver) {
+        this.webDriver = driver;
+    }
+
+    public String getTitle(){
+        return pageTitle.getText();
     }
 }

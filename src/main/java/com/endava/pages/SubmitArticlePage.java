@@ -10,12 +10,11 @@ import java.util.List;
 import java.util.Random;
 
 public class SubmitArticlePage {
-    private WebDriver webDriver;
 
-    public SubmitArticlePage(WebDriver driver) {
-        this.webDriver = driver;
-    }
-//Content tab
+    @FindBy(css = ".latestnews li a span")
+    private List<WebElement> submittedArticlesList;
+
+    //Content tab
     @FindBy(css = "#com-content-formTabs li a")
     private List<WebElement> articleOptions;
 
@@ -76,6 +75,21 @@ public class SubmitArticlePage {
 
     @FindBy(css = "#mceu_184 button")
     private WebElement closeImageWindow;
+
+    private WebDriver webDriver;
+
+    public SubmitArticlePage(WebDriver driver) {
+        this.webDriver = driver;
+    }
+
+    public String GetArticleName(){
+        return articleTitle.getText();
+    }
+
+    public String GetSubmittedArticleName(){
+        return submittedArticlesList.get(0).getText();
+    }
+
 //Format text
     public void FormatFont(String font){
         for(int i = 0; i < fontStyleOptions.size(); i++){
@@ -106,6 +120,7 @@ public class SubmitArticlePage {
         webDriver.switchTo().frame(articleFrame);
         webDriver.findElement(By.id("tinymce")).sendKeys(text);
         webDriver.switchTo().defaultContent();
+        saveArticleButton.click();
     }
 //Insert image
 //    public void InsertImage(String source){

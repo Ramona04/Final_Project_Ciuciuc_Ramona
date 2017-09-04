@@ -1,5 +1,6 @@
 package com.endava.pages;
 
+import com.gargoylesoftware.htmlunit.Page;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,16 +14,10 @@ import java.util.List;
 
 public class MainPage {
 
-    private WebDriver webDriver;
-
-    public MainPage(WebDriver driver) {
-        this.webDriver = driver;
-    }
-
     @FindBy(xpath = ".//*[@id='content']/div[3]/div[1]/h2")
     private WebElement pageLegend;
 
-    @FindBy(css = ".btn.btn-primary")
+    @FindBy(css = "input[value='Log out']")
     private WebElement logoutButton;
 
     @FindBy(css = ".tagspopular ul li a")
@@ -64,18 +59,26 @@ public class MainPage {
     @FindBy(id = "back-top")
     private WebElement backToTop;
 
+    private WebDriver webDriver;
+
+    public MainPage(WebDriver driver) {
+        this.webDriver = driver;
+    }
+
     public PopularTagsPage SelectTag(String tagName){
         popularTags.click();
         PopularTagsPage popularTagsPage = PageFactory.initElements(webDriver, PopularTagsPage.class);
         return popularTagsPage;
     }
 
-    public void SelectArticle(String articleName){
+    public SelectedArticlePage SelectArticle(String articleName){
             for(int i = 0; i < latestArticles.size(); i++) {
                 if (latestArticles.get(i).getText().equals(articleName)) {
                     latestArticles.get(i).click();
                 }
             }
+            SelectedArticlePage selectedArticlePage = PageFactory.initElements(webDriver, SelectedArticlePage.class);
+            return selectedArticlePage;
     }
 
     public ProfilePage Profile(){
@@ -106,6 +109,10 @@ public class MainPage {
         siteSettings.click();
         SiteSettingsPage siteSettingsPage = PageFactory.initElements(webDriver, SiteSettingsPage.class);
         return siteSettingsPage;
+    }
+
+    public void Logout(){
+        logoutButton.click();
     }
 
     public void waitUntilCompleteLoad(){

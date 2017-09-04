@@ -9,5 +9,6 @@ public class GoToSiteSettings extends TestClass {
     @Test
     public void SelectTagTest() {
         SiteSettingsPage siteSettingsPage = mainPage.SiteSettings();
+        Assert.assertEquals("Site Settings", siteSettingsPage.getTitle());
     }
 }

@@ -5,11 +5,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class SiteAdminPage {
-    WebDriver webDriver;
-
-    public SiteAdminPage(WebDriver driver) {
-        this.webDriver = driver;
-    }
 
     @FindBy(id = "mod-login-username")
     private WebElement adminUsername;
@@ -19,6 +14,19 @@ public class SiteAdminPage {
 
     @FindBy(css = ".btn.btn-primary.btn-block.btn-large.login-button")
     private WebElement adminLoginButton;
+
+    @FindBy(className = "page-title")
+    private WebElement pageTitle;
+
+    WebDriver webDriver;
+
+    public SiteAdminPage(WebDriver driver) {
+        this.webDriver = driver;
+    }
+
+    public String GetPageTitle(){
+        return pageTitle.getText();
+    }
 
     public void SendAdminCredentials(String user, String password) {
         adminUsername.sendKeys(user);

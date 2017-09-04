@@ -1,10 +1,8 @@
 package com.endava.tests;
 
-import com.endava.pages.LatestArticlesPage;
 import com.endava.pages.ProfilePage;
 import org.junit.Assert;
 import org.junit.Test;
-import org.openqa.selenium.WebDriver;
 
 public class GoToProfilePage extends TestClass {
     @Test

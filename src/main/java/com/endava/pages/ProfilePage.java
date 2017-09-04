@@ -10,11 +10,6 @@ import org.openqa.selenium.support.ui.Select;
 import java.util.List;
 
 public class ProfilePage {
-    private WebDriver webDriver;
-
-    public ProfilePage(WebDriver driver) {
-        this.webDriver = driver;
-    }
 
     @FindBy(xpath = ".//*[@id='member-profile']/fieldset[1]/legend")
     private WebElement pageLegend;
@@ -100,6 +95,12 @@ public class ProfilePage {
 
     @FindBy(css = ".controls .btn[title='Cancel']")
     private WebElement CancelEditButton;
+
+    private WebDriver webDriver;
+
+    public ProfilePage(WebDriver driver) {
+        this.webDriver = driver;
+    }
 
     public Boolean CheckPage() {
         return pageLegend.getText().contains("Profile");
