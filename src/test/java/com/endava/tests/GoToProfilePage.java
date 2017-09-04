@@ -9,8 +9,8 @@ public class GoToProfilePage extends TestClass {
     public void SelectArticleTest() {
         ProfilePage profilePage = mainPage.Profile();
         Assert.assertTrue(profilePage.CheckPage());
-        profilePage.EditProfile("Ramona", "Password123", "en_rciuciuc@outlook.com");
-        profilePage.Editor("Editor - CodeMirror", "Bucharest", "English (United Kingdom)", "English (United Kingdom)", "- Use Default -", "- Use Default -");
+        profilePage.EditProfile();
+        profilePage.Editor();
     }
 
 

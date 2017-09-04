@@ -5,6 +5,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class LoginPage {
 
     @FindBy(className = "site-title")
@@ -53,10 +58,22 @@ public class LoginPage {
         return forgotPassword.isEnabled();
     }
 
-    public MainPage SendCredentials(String user, String pass) {
+    public MainPage SendCredentials() {
 
-        username.sendKeys(user);
-        password.sendKeys(pass);
+        Properties properties = new Properties();
+        InputStream input = null;
+
+        try {
+            input = new FileInputStream("C:\\Users\\rciuciuc\\Desktop\\Homework and Materials\\FinalProject\\src\\main\\resources\\config.properties");
+            properties.load(input);
+
+            username.sendKeys( properties.getProperty("username"));
+            password.sendKeys(properties.getProperty("password"));
+
+        }catch (IOException ex){
+            ex.printStackTrace();
+        }
+
         rememberCheckBox.click();
         loginButton.click();
 

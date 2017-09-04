@@ -10,7 +10,7 @@ public class SiteAdminTest extends TestClass {
     @Test
     public void SiteAdminTest() {
         SiteAdminPage siteAdminPage = mainPage.SiteAdmin();
-        siteAdminPage.SendAdminCredentials("ramona", "Password123");
+        siteAdminPage.SendAdminCredentials();
         Assert.assertEquals("Control Panel", siteAdminPage.GetPageTitle());
     }
 }

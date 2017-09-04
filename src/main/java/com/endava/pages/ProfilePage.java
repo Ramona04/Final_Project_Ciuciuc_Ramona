@@ -7,7 +7,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 
 public class ProfilePage {
 
@@ -102,75 +106,96 @@ public class ProfilePage {
         this.webDriver = driver;
     }
 
+    Properties properties = new Properties();
+    InputStream input = null;
+
     public Boolean CheckPage() {
         return pageLegend.getText().contains("Profile");
     }
 
-    public void EditProfile(String pName, String pPassword, String pEmail) {
-        if (profileName.isDisplayed()) {
-            profileName.clear();
-            profileName.sendKeys(pName);
-        }
+    public void EditProfile() {
 
-        if (profilePassword1.isDisplayed() && profilePassword2.isDisplayed()) {
-            profilePassword1.sendKeys(pPassword);
-            profilePassword2.sendKeys(pPassword);
-        }
-        if (profileEmail1.isDisplayed() && profileEmail2.isDisplayed()) {
-            profileEmail1.clear();
-            profileEmail1.sendKeys(pEmail);
-            profileEmail2.clear();
-            profileEmail2.sendKeys(pEmail);
+        try {
+            input = new FileInputStream("C:\\Users\\rciuciuc\\Desktop\\Homework and Materials\\FinalProject\\src\\main\\resources\\config.properties");
+            properties.load(input);
+
+            if (profileName.isDisplayed()) {
+                profileName.clear();
+                profileName.sendKeys(properties.getProperty("pName"));
+            }
+
+            if (profilePassword1.isDisplayed() && profilePassword2.isDisplayed()) {
+                profilePassword1.sendKeys(properties.getProperty("pPassword"));
+                profilePassword2.sendKeys(properties.getProperty("pPassword"));
+            }
+            if (profileEmail1.isDisplayed() && profileEmail2.isDisplayed()) {
+                profileEmail1.clear();
+                profileEmail1.sendKeys(properties.getProperty("pEmail"));
+                profileEmail2.clear();
+                profileEmail2.sendKeys(properties.getProperty("pEmail"));
+            }
+
+        }catch (IOException ex){
+            ex.printStackTrace();
         }
 
     }
 
-    public void Editor(String editorOption, String timeZoneOption, String frontEndOption, String backendLanguageOption, String backendTemplateOption, String helpSiteOption) {
-        editorDrop.click();
-        if (editorDropdownElements.isDisplayed()) {
-            for (int i = 0; i < editorList.size(); i++) {
-                if (editorList.get(i).getText().equals(editorOption)) {
-                    editorList.get(i).click();
+    public void Editor() {
+        try {
+            input = new FileInputStream("C:\\Users\\rciuciuc\\Desktop\\Homework and Materials\\FinalProject\\src\\main\\resources\\config.properties");
+            properties.load(input);
+
+            editorDrop.click();
+            if (editorDropdownElements.isDisplayed()) {
+                for (int i = 0; i < editorList.size(); i++) {
+                    if (editorList.get(i).getText().equals(properties.getProperty("editorOption"))) {
+                        editorList.get(i).click();
+                    }
                 }
             }
-        }
-        timeZoneDrop.click();
-        if (timeZoneSearch.isDisplayed()) {
-            timeZoneSearch.sendKeys(timeZoneOption);
-            timeZoneSearch.sendKeys(Keys.ENTER);
-        }
-        frontendLanguageDrop.click();
-        if (frontendLanguageDropdownElements.isDisplayed()) {
-            for (int i = 0; i < frontendLanguageList.size(); i++) {
-                if (frontendLanguageList.get(i).getText().equals(frontEndOption)) {
-                    frontendLanguageList.get(i).click();
+            timeZoneDrop.click();
+            if (timeZoneSearch.isDisplayed()) {
+                timeZoneSearch.sendKeys(properties.getProperty("timeZoneOption"));
+                timeZoneSearch.sendKeys(Keys.ENTER);
+            }
+            frontendLanguageDrop.click();
+            if (frontendLanguageDropdownElements.isDisplayed()) {
+                for (int i = 0; i < frontendLanguageList.size(); i++) {
+                    if (frontendLanguageList.get(i).getText().equals(properties.getProperty("frontEndOption"))) {
+                        frontendLanguageList.get(i).click();
+                    }
                 }
             }
-        }
-        backendTemplateDrop.click();
-        if (backendTemplateDropdownElements.isDisplayed()) {
-            for (int i = 0; i < backendTemplateList.size(); i++) {
-                if (backendTemplateList.get(i).getText().equals(backendTemplateOption)) {
-                    backendTemplateList.get(i).click();
+            backendTemplateDrop.click();
+            if (backendTemplateDropdownElements.isDisplayed()) {
+                for (int i = 0; i < backendTemplateList.size(); i++) {
+                    if (backendTemplateList.get(i).getText().equals(properties.getProperty("backendTemplateOption"))) {
+                        backendTemplateList.get(i).click();
+                    }
                 }
             }
-        }
-        backendLanguageDrop.click();
-        if (backendLanguageDropdownElements.isDisplayed()) {
-            for (int i = 0; i < backendLanguageList.size(); i++) {
-                if (backendLanguageList.get(i).getText().equals(backendLanguageOption)) {
-                    backendLanguageList.get(i).click();
+            backendLanguageDrop.click();
+            if (backendLanguageDropdownElements.isDisplayed()) {
+                for (int i = 0; i < backendLanguageList.size(); i++) {
+                    if (backendLanguageList.get(i).getText().equals(properties.getProperty("backendLanguageOption"))) {
+                        backendLanguageList.get(i).click();
+                    }
                 }
             }
-        }
-        helpSiteDrop.click();
-        if (helpSiteDropdownElements.isDisplayed()) {
-            for (int i = 0; i < helpSiteList.size(); i++) {
-                if (helpSiteList.get(i).getText().equals(helpSiteOption)) {
-                    helpSiteList.get(i).click();
+            helpSiteDrop.click();
+            if (helpSiteDropdownElements.isDisplayed()) {
+                for (int i = 0; i < helpSiteList.size(); i++) {
+                    if (helpSiteList.get(i).getText().equals(properties.getProperty("helpSiteOption"))) {
+                        helpSiteList.get(i).click();
+                    }
                 }
             }
+
+        }catch (IOException ex){
+            ex.printStackTrace();
         }
+
         submitProfileButton.click();
 
 

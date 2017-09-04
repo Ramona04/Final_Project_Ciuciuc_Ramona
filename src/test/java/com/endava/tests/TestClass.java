@@ -21,7 +21,7 @@ public class TestClass {
         webDriver.get("http://localhost:81/joomla/");
         loginPage = PageFactory.initElements(webDriver, LoginPage.class);
         mainPage = PageFactory.initElements(webDriver, MainPage.class);
-        MainPage mainPage = loginPage.SendCredentials("ramona", "Password123");
+        MainPage mainPage = loginPage.SendCredentials();
     }
 
 //    @AfterClass

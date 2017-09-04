@@ -7,7 +7,7 @@ import org.junit.Test;
 public class GoToSelectedArticleTest extends TestClass {
     @Test
     public void SelectArticleTest() {
-        SelectedArticlePage selectedArticlePage = mainPage.SelectArticle("My first Article");
-        Assert.assertEquals("My first Article", selectedArticlePage.GetArticleTitle());
+        SelectedArticlePage selectedArticlePage = mainPage.SelectArticle("10 Books you need to read this summer");
+        Assert.assertEquals("10 Books you need to read this summer", selectedArticlePage.GetArticleTitle());
     }
 }

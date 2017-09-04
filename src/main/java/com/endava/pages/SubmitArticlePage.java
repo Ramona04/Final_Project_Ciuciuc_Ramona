@@ -6,7 +6,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
+import java.util.Properties;
 import java.util.Random;
 
 public class SubmitArticlePage {
@@ -110,17 +114,28 @@ public class SubmitArticlePage {
     }
 
 //Write article
-    public void WriteArticle(String title, String alias, String text){
-        if(articleTitle.isEnabled()){
-            articleTitle.sendKeys(title);
+    public void WriteArticle(){
+        Properties properties = new Properties();
+        InputStream input = null;
+
+        try {
+            input = new FileInputStream("C:\\Users\\rciuciuc\\Desktop\\Homework and Materials\\FinalProject\\src\\main\\resources\\config.properties");
+            properties.load(input);
+
+            if(articleTitle.isEnabled()){
+                articleTitle.sendKeys(properties.getProperty("title"));
+            }
+            if(articleAlias.isEnabled()){
+                articleAlias.sendKeys(properties.getProperty("alias"));
+            }
+            webDriver.switchTo().frame(articleFrame);
+            webDriver.findElement(By.id("tinymce")).sendKeys(properties.getProperty("text"));
+            webDriver.switchTo().defaultContent();
+            saveArticleButton.click();
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
-        if(articleAlias.isEnabled()){
-            articleAlias.sendKeys(alias);
-        }
-        webDriver.switchTo().frame(articleFrame);
-        webDriver.findElement(By.id("tinymce")).sendKeys(text);
-        webDriver.switchTo().defaultContent();
-        saveArticleButton.click();
     }
 //Insert image
 //    public void InsertImage(String source){
